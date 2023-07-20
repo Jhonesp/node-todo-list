@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    min-height: 95vh;
+}
+
+main {
+    text-align: center;
+    flex: 1 0 auto;
+  }
+
+  p {
+    margin: 0;
+    padding: 20px;
+    font-size: 20px;
+    color: #00204a;
+}
+
+#heading {
+    background-color: #a683e3;
+    text-align: center;
+}
+h1 {
+    color: #fff;
+    padding: 10px;
+}
+.item {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f1f1f1;
+  }
+
+.box {
+    max-width: 400px;
+    margin: 50px auto;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
