@@ -19,15 +19,14 @@
                    <p><%= newListItems[i] %> </p> 
                 </div>
             <% } %>
+
+            <form class="item" action="/" method="post">
+                <input type="text" name="newItem"  placeholder="Añade algo" required>
+                <button type="submit">Enviar</button>
+            </form>
         </div>
-        <ul>
-            
-        </ul>
     
-        <form action="/" method="post">
-            <input type="text" name="newItem" placeholder="Añade algo" required>
-            <button type="submit">Enviar</button>
-        </form>
+
     </main>
     
 
