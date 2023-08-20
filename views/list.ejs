@@ -11,18 +11,24 @@
     <main>
         <div id="heading" class="box">
             <h1> <%= KindOfDay %> </h1>
+            <h1>  <%= listTitle %>  </h1>
         </div>
         
         <div class="box">
             <% for( let i = 0; i < newListItems.length; i++ ) { %>
+                <form action="/delete" method="post">
                 <div class="item">
+                    
+                    <input type="checkbox" name="checkbox" value="<%= newListItems[i]._id %>" onchange="this.form.submit()">
                    <p><%= newListItems[i].task %> </p> 
+                    
                 </div>
+                </form>
             <% } %>
 
             <form class="item" action="/" method="post">
                 <input type="text" name="newItem"  placeholder="Añade algo" required>
-                <button type="submit">Enviar</button>
+                <button type="submit" name="list" value="<%= listTitle %>">Enviar</button>
             </form>
         </div>
     
