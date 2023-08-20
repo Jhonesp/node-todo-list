@@ -1,6 +1,7 @@
 import Express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import _ from "lodash";
 const app = Express();
 app.use(Express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -60,6 +61,7 @@ app.get("/", async (req, res) => {
     Items = items;
   })
 
+  //solo si la coleccion en la bd esta vacia, inserta los items default
   if (Items.length == 0){
     Item.insertMany(defaultItems);
     await Item.find().then(function(items){
@@ -98,12 +100,28 @@ app.post("/", async(req, res) =>{
 })
 
 app.post("/delete", async (req, res) => {
-  await Item.deleteOne({_id: req.body.checkbox});
-  res.redirect("/");
+  const listName = req.body.listName;
+  const checkedItemId = req.body.checkbox;
+  if(listName === "Lista Normal"){
+    await Item.deleteOne({_id: checkedItemId});
+    res.redirect("/");
+  }else{
+
+    await List.findOneAndUpdate(
+      {name: listName},
+      {$pull: {listItems: {_id: checkedItemId}}}
+    ).then(function () {
+      res.redirect("/" + listName);
+      })
+        .catch(function (err) {
+          console.log(err);
+        });
+  }
+ 
 })
 
 app.get("/:customListName", async(req, res) => {
-    const customListName = req.params.customListName;
+    const customListName = _.capitalize(req.params.customListName);
 
     await List.findOne({name: customListName}).then(async(foundList)=>{
       if (!foundList) {
@@ -125,11 +143,8 @@ app.get("/:customListName", async(req, res) => {
     }).catch((err) =>{
         console.log(err);
     })
-
     
   })
-
-
 
 
 app.listen(3000, () => {
