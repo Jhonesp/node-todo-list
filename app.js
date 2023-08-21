@@ -3,11 +3,14 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import _ from "lodash";
 const app = Express();
+const PORT = process.env.PORT || 3030;
+const mongologin = process.env.mongologin;
+
 app.use(Express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 async function main(){
-  await mongoose.connect("mongodb+srv://mongologin@cluster0.s2jdkav.mongodb.net/todolistDB");
+  await mongoose.connect("mongodb+srv://"+mongologin+"@cluster0.s2jdkav.mongodb.net/todolistDB");
   console.log("Conectado a la BD");
 }
 main();
@@ -147,6 +150,6 @@ app.get("/:customListName", async(req, res) => {
   })
 
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("servidor funcionando en puerto 3000");
 });
