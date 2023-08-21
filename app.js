@@ -7,7 +7,7 @@ app.use(Express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 async function main(){
-  await mongoose.connect("mongodb://127.0.0.1:27017/todolistDB");
+  await mongoose.connect("mongodb+srv://mongologin@cluster0.s2jdkav.mongodb.net/todolistDB");
   console.log("Conectado a la BD");
 }
 main();
