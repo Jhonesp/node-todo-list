@@ -2,6 +2,7 @@ import Express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import _ from "lodash";
+import 'dotenv/config'
 const app = Express();
 const PORT = process.env.PORT || 3030;
 const mongologin = process.env.mongologin;
